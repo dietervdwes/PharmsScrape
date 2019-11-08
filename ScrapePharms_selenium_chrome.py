@@ -9,20 +9,42 @@ from lxml import html
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 
-chrome_options = Options()
-chrome_options.add_argument("--headless")
 
-driver = webdriver.Chrome(chrome_options = chrome_options)
+driver = webdriver.Chrome()
+
 #If you do not know how to use Selenium, here is a quick overview:
 
 driver.get("http://10.184.55.233:8080") #Browser goes to pharms.westerncape.gov.ac.za
 #Finding elements: Use either the ELEMENTS or ELEMENT method. Examples:
 
-driver.find_element_by_css_selector("div.logo-subtext") #Find your country in Google. (singu
+#driver.find_element_by_css_selector("#IWEDITUSERNAME") #Find your country in Google. (singu
+#sitename = driver.find_element_by_css_selector("#IWLABELLOGINDESCRIPTION")
+
+#print(sitename.text)
 
 
 
+assert "Pharmacology" in driver.title
+#COMPLETE THE USERNAME AND PASSWORD FIELDS
+#Find the username field by its id in the HTML markup (e.g. id="uid) and the password by the name attribute (e.g. name="pwd")
 
+username = driver.find_element_by_id("IWEDITUSERNAME")
+username.clear()
+username.send_keys("WARD")
+
+password = driver.find_element_by_id("IWEDITPASSWORD")
+password.clear()
+password.send_keys("WARD")
+
+#CLICK THE LOGIN BUTTON
+#Now we need to submit the login credentials by clicking the submit button
+driver.find_element_by_id("IWBUTTONLOGIN").click()
+
+#CLICK A LINK ON THE PAGE BASED ON THE LINK TEXT
+#This is handy where you know the text of the link you want to target, but there's no unique identifier reliably grip onto in the mark up. Here, we're simply looking for a link with the text: "Grumpy cats".
+#####    driver.find_element_by_link_text("Grumpy cats").click()
+
+'''
 
 #To log into the homepage:
 #import requests
